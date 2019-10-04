@@ -111,7 +111,7 @@
 
       var spec = {
         numPerPage: 5,
-        selectPage: 3
+        selectPage: 5
       };
 
       //console.log(blogPosts.length);
@@ -124,27 +124,28 @@
       function init() {
         //var i;
         let buttonList = document.getElementById("buttonList");
-        let refNode = document.getElementById("refNode");
+        let refNode = document.getElementById("nextButton");
         for (let i = 0; i < spec.numPerPage; i++) {
           let li = document.createElement("li");
           li.classList.add("page-item");
           let a = document.createElement("a");
           a.classList.add("page-link");
+          a.href = "pagination.html?page=" + (i + 1);
           let aText = document.createTextNode(i + 1);
           a.appendChild(aText);
           li.appendChild(a);
           buttonList.insertBefore(li, refNode);
           //console.log(buttonList);
         }
-        // //Get the value "link disable" of the onclick attribute of a button element Previous and Next
-        // if (spec.selectPage == 1) {
-        //   var prevButton = document.getElementById("prevButton");
-        //   prevButton.classList.add("linkDisable");
-        // }
-        // if (spec.selectPage == 3) {
-        //   var nextButton = document.getElementById("nextButton");
-        //   nextButton.classList.add("linkDisable");
-        // }
+        //Get the value "link disable" of the onclick attribute of a button element Previous and Next
+        if (spec.selectPage == 1) {
+          var prevButton = document.getElementById("prevButton");
+          prevButton.classList.add("disabled");
+        }
+        if (spec.selectPage == 5) {
+          var nextButton = document.getElementById("nextButton");
+          nextButton.classList.add("disabled");
+        }
       }
     </script>
   </head>
@@ -178,12 +179,12 @@
       <div class="flex-container">
         <nav aria-label="Page navigation">
           <ul id="buttonList" class="pagination">
-            <li class="page-item">
-              <a id="prevButton" class="page-link" href="#">Previous</a>
+            <li class="page-item" id="prevButton">
+              <a class="page-link" href="#">Previous</a>
             </li>
 
-            <li class="page-item" id="refNode">
-              <a id="nextButton" class="page-link" href="#">Next</a>
+            <li class="page-item" id="nextButton">
+              <a class="page-link" href="#">Next</a>
             </li>
           </ul>
         </nav>
